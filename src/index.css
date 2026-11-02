@@ -1,5 +1,6 @@
 :root {
     --root-height: calc(100vh - 10px);
+    --basic-color: #ffffff;
 }
 * {
     box-sizing: border-box;

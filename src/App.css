@@ -17,7 +17,7 @@ main {
 
 .preview-panel {
     border-radius: 0.25rem;
-    background-color: #ffffff;
+    background-color: var(--basic-color);
     flex: 1 0 auto;
 }
 
@@ -25,4 +25,158 @@ footer {
     height: 1rem;
     margin-top: auto;
     padding: 0.25rem 0.5rem;
+}
+
+.tool-panel h4 {
+    margin: 0.5rem 0;
+}
+
+.tool-panel input[type="text"],
+.tool-panel input[type="month"],
+.tool-panel textarea,
+.tool-panel select {
+    width: 100%;
+    padding: 0.35rem 0.5rem;
+    border: 1px solid #cbd2d9;
+    border-radius: 0.25rem;
+    font: inherit;
+    background: var(--basic-color);
+}
+
+.tool-panel textarea {
+    resize: vertical;
+}
+@supports (field-sizing: content) {
+    .tool-panel textarea {
+        resize: none;
+        field-sizing: content;
+        max-width: 26rem;
+    }
+}
+
+.cv-name,
+.cv-title {
+    display: block;
+    margin-bottom: 0.4rem;
+}
+
+.cv-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.form-input-box {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.form-input-box > span {
+    display: block;
+    margin-bottom: 0.15rem;
+    font-size: 0.8rem;
+    color: #52606d;
+}
+
+.add-section {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.separator {
+    margin: 0.75rem 0;
+    border: 0;
+    border-top: 1px solid #d9e2ec;
+}
+
+.photo-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5.25rem;
+    height: 6.75rem;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+    border: 1px dashed #9aa5b1;
+    border-radius: 0.25rem;
+    background: var(--basic-color);
+    font-size: 0.75rem;
+    color: #7b8794;
+}
+
+.photo-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ---------- Abschnitte und Positionen ---------- */
+
+.tool-panel .section,
+.tool-panel .position {
+    margin-top: 0.75rem;
+    padding: 0.6rem;
+    border: 1px solid #d9e2ec;
+    border-radius: 0.25rem;
+    background: var(--basic-color);
+}
+
+.tool-panel .position .position {
+    background: #f8fafb;
+}
+
+.tool-panel .position.chapter {
+    border-style: dashed;
+}
+
+.item-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.4rem;
+}
+
+.item-header strong {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #2d4a63;
+}
+
+.item-controls {
+    display: flex;
+    gap: 0.2rem;
+}
+
+.period-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 0.5rem;
+}
+
+.period-fields .form-input-box {
+    min-width: 0;
+}
+
+.checkbox {
+    display: flex;
+    grid-column: 1 / -1;
+    align-items: center;
+    gap: 0.25rem;
+    margin-bottom: 0.6rem;
+    font-size: 0.85rem;
+}
+
+.button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
 }

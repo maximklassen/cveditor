@@ -1,12 +1,30 @@
-function Section() {
+import Field from "./Field";
+import Position from "./Position";
+
+function Section({ section, dispatch }) {
     return (
         <div className="section">
-            <input type="text" placeholder="Titel des Abschnitts" />
+            <Field
+                label="Titel des Abschnitts"
+                value={section.title}
+                onChange={(title) =>
+                    dispatch({ type: "UPDATE_SECTION", id: section.id, changes: { title } })
+                }
+            />
             <div className="positions-list">
-                {/* List of <Position /> */}
+                {section.positions.map((position, index) => (
+                    <Position
+                        key={position.id}
+                        position={position}
+                        sectionId={section.id}
+                        sectionType={section.type}
+                        dispatch={dispatch}
+                    />
+                ))}
             </div>
             <button>Zeile (Position) hinzufügen</button>
             <button>Unterabschnitt hinzufügen</button>
+            <button>Abschnitt löschen</button>
         </div>
     );
 }
