@@ -1,0 +1,28 @@
+header {
+    height: 4rem;
+    padding: 0.5rem;
+}
+
+main {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0 0.5rem;
+}
+
+.tool-panel,
+.preview-panel {
+    height: calc(var(--root-height, calc(100vh - 10px)) - 5rem);
+    overflow-y: auto;
+}
+
+.preview-panel {
+    border-radius: 0.25rem;
+    background-color: #ffffff;
+    flex: 1 0 auto;
+}
+
+footer {
+    height: 1rem;
+    margin-top: auto;
+    padding: 0.25rem 0.5rem;
+}
