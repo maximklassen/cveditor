@@ -17,7 +17,7 @@ main {
 
 .preview-panel {
     border-radius: 0.25rem;
-    background-color: #ffffff;
+    background-color: var(--basic-color);
     flex: 1 0 auto;
 }
 
@@ -26,7 +26,6 @@ footer {
     margin-top: auto;
     padding: 0.25rem 0.5rem;
 }
-
 
 .tool-panel h4 {
     margin: 0.5rem 0;
@@ -41,11 +40,18 @@ footer {
     border: 1px solid #cbd2d9;
     border-radius: 0.25rem;
     font: inherit;
-    background: #fff;
+    background: var(--basic-color);
 }
 
 .tool-panel textarea {
     resize: vertical;
+}
+@supports (field-sizing: content) {
+    .tool-panel textarea {
+        resize: none;
+        field-sizing: content;
+        max-width: 26rem;
+    }
 }
 
 .cv-name,
@@ -92,7 +98,7 @@ footer {
     overflow: hidden;
     border: 1px dashed #9aa5b1;
     border-radius: 0.25rem;
-    background: #fff;
+    background: var(--basic-color);
     font-size: 0.75rem;
     color: #7b8794;
 }
@@ -111,7 +117,7 @@ footer {
     padding: 0.6rem;
     border: 1px solid #d9e2ec;
     border-radius: 0.25rem;
-    background: #fff;
+    background: var(--basic-color);
 }
 
 .tool-panel .position .position {
