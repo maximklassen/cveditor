@@ -1,5 +1,14 @@
 import { normalizeCv } from "./cvModel";
 
+export function createSection(id, type) {
+    return {
+        id,
+        type,
+        title: SECTION_TYPES[type].defaultTitle,
+        positions: [],
+    };
+}
+
 export function cvReducer(state, action) {
     switch (action.type) {
         case "SET_FIELD":
@@ -13,7 +22,8 @@ export function cvReducer(state, action) {
 
         case "ADD_SECTION":
             return {
-                ...state
+                ...state,
+                sections: [...state.sections, createSection(action.id, action.sectionType)],
             };
 
         case "UPDATE_SECTION":
