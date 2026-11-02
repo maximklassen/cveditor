@@ -7,6 +7,7 @@ function Section() {
             </div>
             <button>Zeile (Position) hinzufügen</button>
             <button>Unterabschnitt hinzufügen</button>
+            <button>Abschnitt löschen</button>
         </div>
     );
 }

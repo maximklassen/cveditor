@@ -30,6 +30,7 @@ function Position() {
                     <button>Zeile (Position) hinzufügen</button>
                 </>
             )}
+            <button>Zeile löschen</button>
         </div>
     );
 }
