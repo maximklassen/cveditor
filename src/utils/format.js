@@ -11,5 +11,19 @@ export function shortenUrl(url) {
 }
 
 export function parseDescription(text) {
-    return text; // TODO: MD to HTML
+    const blocks = [];
+    for (const line of (text ?? "").split("\n")) {
+        const trimmed = line.trim();
+        if (!trimmed) continue;
+
+        if (trimmed.startsWith("- ")) {
+            const item = trimmed.slice(2);
+            const last = blocks[blocks.length - 1];
+            if (last?.type === "ul") last.items.push(item);
+            else blocks.push({ type: "ul", items: [item] });
+        } else {
+            blocks.push({ type: "p", text: trimmed });
+        }
+    }
+    return blocks;
 }
