@@ -6,9 +6,15 @@
     margin: 0 auto;
     padding: 1.5rem 2rem 2rem;
     color: #1f2933;
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-family:
+        system-ui,
+        -apple-system,
+        "Segoe UI",
+        Roboto,
+        sans-serif;
     font-size: 0.9rem;
     line-height: 1.45;
+    position: relative;
 }
 
 .cv h1,
@@ -53,10 +59,10 @@
 
 .cv .photo {
     display: block;
-    width: 3.5cm;
+    width: 4.5cm;
     height: 4.5cm;
     object-fit: cover;
-    border-radius: 0.25rem;
+    border-radius: 50%;
 }
 
 .cv .logic-section {
@@ -144,4 +150,43 @@
 
 .cv .skills-box .position {
     margin-bottom: 0.3rem;
+}
+
+.page-delimiter {
+    position: absolute;
+    top: 297mm;
+    left: 0;
+    width: 100%;
+    height: 0;
+    /* border-top: 0.2mm dotted gray; */
+}
+
+@media print {
+    .page-delimiter {
+        display: none;
+    }
+}
+
+@page {
+    size: A4;
+    margin: 8mm 15mm 5mm 15mm;
+    padding: 0;
+}
+@page :first {
+    @top-left {
+        content: "";
+        border: none;
+    }
+    @top-right {
+        content: "";
+        border: none;
+    }
+    @bottom-left {
+        content: "";
+        border: none;
+    }
+    @bottom-right {
+        content: "";
+        border: none;
+    }
 }

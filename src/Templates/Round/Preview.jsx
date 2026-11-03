@@ -140,9 +140,14 @@ function Preview({ cv }) {
                                     <strong>Wohnort:</strong> {contact.address}
                                 </li>
                             )}
-                            {mail.length > 0 && (
+                            {contact.phone && (
                                 <li>
-                                    <strong>Kontakt:</strong> {mail.join(" | ")}
+                                    <strong>Telefonnummer:</strong> {contact.phone}
+                                </li>
+                            )}
+                            {contact.email && (
+                                <li>
+                                    <strong>E-Mail:</strong> {contact.mail}
                                 </li>
                             )}
                             {links.length > 0 && (

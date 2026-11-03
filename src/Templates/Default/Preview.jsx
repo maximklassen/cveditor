@@ -1,4 +1,5 @@
 import { formatMonth, parseDescription, shortenUrl } from "../../utils/format";
+import ScaledPage from "../ScaledPage";
 import "./preview.css";
 
 // Das HTML entspricht dem Lebenslauf aus index.php (gleiche CSS-Klassen).
@@ -129,50 +130,65 @@ function Preview({ cv }) {
         .filter(Boolean)
         .map(shortenUrl);
     const mail = [contact.email, contact.phone].filter(Boolean);
+    const isEmpty = !cv.name && !cv.title && !cv.profile?.trim() && cv.sections.length === 0;
+
+    if (isEmpty) {
+        return (
+            <div className="preview-panel">
+                <p className="cv-empty">
+                    Der Lebenslauf ist noch leer. Trage links deine Daten ein oder füge einen
+                    Abschnitt hinzu.
+                </p>
+            </div>
+        );
+    }
 
     return (
         <div className="preview-panel">
-            <div className="cv">
-                <div className="cv-header">
-                    <div className="header-title">
-                        <h1>{cv.name}</h1>
-                        <strong className="subtitle">{cv.title}</strong>
-                        <ul className="contacts">
-                            {contact.address && (
-                                <li>
-                                    <strong>Wohnort:</strong> {contact.address}
-                                </li>
-                            )}
-                            {mail.length > 0 && (
-                                <li>
-                                    <strong>Kontakt:</strong> {mail.join(" | ")}
-                                </li>
-                            )}
-                            {links.length > 0 && (
-                                <li>
-                                    <strong>Links:</strong> {links.join(" | ")}
-                                </li>
-                            )}
-                        </ul>
-                    </div>
-                    {cv.photo && (
-                        <div className="header-photo">
-                            <img className="photo" src={cv.photo} alt="" aria-hidden="true" />
+            <ScaledPage>
+                <div className="cv">
+                    <div className="page-delimiter"></div>
+                    <div className="cv-header">
+                        <div className="header-title">
+                            <h1>{cv.name}</h1>
+                            <strong className="subtitle">{cv.title}</strong>
+                            <ul className="contacts">
+                                {contact.address && (
+                                    <li>
+                                        <strong>Wohnort:</strong> {contact.address}
+                                    </li>
+                                )}
+                                {mail.length > 0 && (
+                                    <li>
+                                        <strong>Kontakt:</strong> {mail.join(" | ")}
+                                    </li>
+                                )}
+                                {links.length > 0 && (
+                                    <li>
+                                        <strong>Links:</strong> {links.join(" | ")}
+                                    </li>
+                                )}
+                            </ul>
                         </div>
-                    )}
+                        {cv.photo && (
+                            <div className="header-photo">
+                                <img className="photo" src={cv.photo} alt="" aria-hidden="true" />
+                            </div>
+                        )}
+                    </div>
+                    <div className="cv-main">
+                        {cv.profile?.trim() && (
+                            <section className="logic-section">
+                                <h2>Profil</h2>
+                                <p className="color-box">{cv.profile}</p>
+                            </section>
+                        )}
+                        {cv.sections.map((section) => (
+                            <CvSection key={section.id} section={section} />
+                        ))}
+                    </div>
                 </div>
-                <div className="cv-main">
-                    {cv.profile?.trim() && (
-                        <section className="logic-section">
-                            <h2>Profil</h2>
-                            <p className="color-box">{cv.profile}</p>
-                        </section>
-                    )}
-                    {cv.sections.map((section) => (
-                        <CvSection key={section.id} section={section} />
-                    ))}
-                </div>
-            </div>
+            </ScaledPage>
         </div>
     );
 }

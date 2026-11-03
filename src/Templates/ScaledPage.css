@@ -1,0 +1,32 @@
+/* Das Blatt hat immer die Breite von DIN A4. Wie groß es auf dem Bildschirm
+   erscheint, bestimmt allein der transform: scale(...) aus ScaledPage.jsx. */
+
+.scaled-page {
+    width: 100%;
+}
+
+.scaled-page-sheet {
+    width: 210mm;
+    background: #fff;
+    box-shadow: 0 1px 6px rgba(31, 41, 51, 0.25);
+    transform-origin: top left;
+}
+
+/* Seitenränder oben/unten pro Druckseite; links/rechts übernimmt das Padding des Lebenslaufs. */
+@page {
+    size: A4;
+    margin: 15mm 0;
+}
+
+/* Beim Drucken: keine Skalierung, das Blatt ist genau 210 mm breit.
+   !important, weil Höhe und transform als Inline-Style gesetzt werden. */
+@media print {
+    .scaled-page {
+        height: auto !important;
+    }
+
+    .scaled-page-sheet {
+        transform: none !important;
+        box-shadow: none;
+    }
+}
