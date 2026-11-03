@@ -1,16 +1,31 @@
-function SectionAdd() {
+import { useState } from "react";
+import { SECTION_TYPES, createId } from "../state/cvModel";
+
+function SectionAdd({ dispatch }) {
+    const [sectionType, setSectionType] = useState("default");
+
     return (
         <>
             <h4>Abschnitt hinzufügen</h4>
-            <div className="form-input-box">
-                <select name="section-type" id="section-type">
-                    <option value="default">Klassischer Abschnitt</option>
-                    <option value="certificates">
-                        Zertifikate/Weiterbildungen
-                    </option>
-                    <option value="skills">Kentnisse</option>
+            <div className="form-input-box add-section">
+                <select
+                    name="section-type"
+                    id="section-type"
+                    value={sectionType}
+                    onChange={(event) => setSectionType(event.target.value)}
+                >
+                    {Object.entries(SECTION_TYPES).map(([type, { label }]) => (
+                        <option key={type} value={type}>
+                            {label}
+                        </option>
+                    ))}
                 </select>
-                <button>Hinzufügen</button>
+                <button
+                    type="button"
+                    onClick={() => dispatch({ type: "ADD_SECTION", id: createId(), sectionType })}
+                >
+                    Hinzufügen
+                </button>
             </div>
         </>
     );

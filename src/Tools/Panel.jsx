@@ -14,6 +14,8 @@ function Panel({ cv, dispatch }) {
                         key={section.id}
                         section={section}
                         dispatch={dispatch}
+                        isFirst={index === 0}
+                        isLast={index === cv.sections.length - 1}
                     />
                 ))}
             </div>

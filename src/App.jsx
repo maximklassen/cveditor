@@ -1,19 +1,24 @@
 //import { useState } from "react";
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import "./App.css";
 import Preview from "./Templates/Default/Preview";
 import Panel from "./Tools/Panel";
 import cvData from "./data/data.json";
 import { normalizeCv } from "./state/cvModel";
 import { cvReducer } from "./state/cvReducer";
+import { loadCv, saveCv } from "./utils/storage";
 
 // Startzustand
 function initCv() {
-    return normalizeCv(cvData);
+    return loadCv() ?? normalizeCv(cvData);
 }
 
 function App() {
     const [cv, dispatch] = useReducer(cvReducer, null, initCv);
+
+    useEffect(() => {
+        saveCv(cv);
+    }, [cv]);
 
     return (
         <>
