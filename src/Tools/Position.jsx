@@ -1,3 +1,4 @@
+import { useCvDispatch } from "../state/CvDispatchContext";
 import { createId } from "../state/cvModel";
 import Field from "./Field";
 import ItemControls from "./ItemControls";
@@ -36,7 +37,8 @@ function PeriodFields({ position, onChange }) {
     );
 }
 
-function Position({ position, sectionId, sectionType, dispatch, isFirst, isLast }) {
+function Position({ position, sectionId, sectionType, isFirst, isLast }) {
+    const dispatch = useCvDispatch();
     const update = (changes) => dispatch({ type: "UPDATE_POSITION", id: position.id, changes });
     const move = (direction) => dispatch({ type: "MOVE_POSITION", id: position.id, direction });
 
@@ -79,7 +81,6 @@ function Position({ position, sectionId, sectionType, dispatch, isFirst, isLast 
                             position={child}
                             sectionId={sectionId}
                             sectionType="default"
-                            dispatch={dispatch}
                             isFirst={index === 0}
                             isLast={index === position.positions.length - 1}
                         />

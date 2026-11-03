@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useCvDispatch } from "../state/CvDispatchContext";
 import { SECTION_TYPES, createId } from "../state/cvModel";
 
-function SectionAdd({ dispatch }) {
+function SectionAdd() {
+    const dispatch = useCvDispatch();
     const [sectionType, setSectionType] = useState("default");
 
     return (

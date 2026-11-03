@@ -1,9 +1,12 @@
+import { useCvDispatch } from "../state/CvDispatchContext";
 import { SECTION_TYPES, createId } from "../state/cvModel";
 import Field from "./Field";
 import ItemControls from "./ItemControls";
 import Position from "./Position";
 
-function Section({ section, dispatch, isFirst, isLast }) {
+function Section({ section, isFirst, isLast }) {
+    const dispatch = useCvDispatch();
+
     function addPosition(chapter) {
         dispatch({
             type: "ADD_POSITION",
@@ -47,7 +50,6 @@ function Section({ section, dispatch, isFirst, isLast }) {
                         position={position}
                         sectionId={section.id}
                         sectionType={section.type}
-                        dispatch={dispatch}
                         isFirst={index === 0}
                         isLast={index === section.positions.length - 1}
                     />

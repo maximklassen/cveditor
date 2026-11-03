@@ -1,3 +1,4 @@
+import { useCvDispatch } from "../state/CvDispatchContext";
 import { imageToDataUrl } from "../utils/files";
 import Field from "./Field";
 
@@ -9,7 +10,8 @@ const CONTACT_FIELDS = [
     ["behance", "Behance"],
 ];
 
-function StaticData({ cv, dispatch }) {
+function StaticData({ cv }) {
+    const dispatch = useCvDispatch();
     const setField = (field, value) => dispatch({ type: "SET_FIELD", field, value });
     const setContact = (field, value) => dispatch({ type: "SET_CONTACT", field, value });
     const github = cv.contact.github ?? [];
