@@ -1,5 +1,6 @@
 import { SECTION_TYPES, createId } from "../state/cvModel";
 import Field from "./Field";
+import ItemControls from "./ItemControls";
 import Position from "./Position";
 
 function Section({ section, dispatch, isFirst, isLast }) {
@@ -13,10 +14,24 @@ function Section({ section, dispatch, isFirst, isLast }) {
         });
     }
 
+    function remove() {
+        const hasContent = section.positions.length > 0;
+        if (hasContent && !window.confirm(`Abschnitt „${section.title}“ löschen?`)) return;
+        dispatch({ type: "REMOVE_SECTION", id: section.id });
+    }
+
     return (
         <div className="section">
             <div className="item-header">
                 <span className="badge">{SECTION_TYPES[section.type].label}</span>
+                <ItemControls
+                    isFirst={isFirst}
+                    isLast={isLast}
+                    onMove={(direction) =>
+                        dispatch({ type: "MOVE_SECTION", id: section.id, direction })
+                    }
+                    onRemove={remove}
+                />
             </div>
             <Field
                 label="Titel des Abschnitts"

@@ -1,5 +1,6 @@
 import { createId } from "../state/cvModel";
 import Field from "./Field";
+import ItemControls from "./ItemControls";
 
 function PeriodFields({ position, onChange }) {
     const isCurrent = position.end === null;
@@ -37,6 +38,13 @@ function PeriodFields({ position, onChange }) {
 
 function Position({ position, sectionId, sectionType, dispatch, isFirst, isLast }) {
     const update = (changes) => dispatch({ type: "UPDATE_POSITION", id: position.id, changes });
+    const move = (direction) => dispatch({ type: "MOVE_POSITION", id: position.id, direction });
+
+    function remove() {
+        const hasChildren = position.chapter && position.positions.length > 0;
+        if (hasChildren && !window.confirm("Unterabschnitt mit allen Positionen löschen?")) return;
+        dispatch({ type: "REMOVE_POSITION", id: position.id });
+    }
 
     function addChild() {
         dispatch({
@@ -48,11 +56,16 @@ function Position({ position, sectionId, sectionType, dispatch, isFirst, isLast 
         });
     }
 
+    const controls = (
+        <ItemControls isFirst={isFirst} isLast={isLast} onMove={move} onRemove={remove} />
+    );
+
     if (position.chapter) {
         return (
             <div className="position chapter">
                 <div className="item-header">
                     <strong>Unterabschnitt</strong>
+                    {controls}
                 </div>
                 <Field
                     label="Titel des Unterabschnitts"
@@ -83,6 +96,7 @@ function Position({ position, sectionId, sectionType, dispatch, isFirst, isLast 
         <div className="position">
             <div className="item-header">
                 <strong>{position.title || "Neue Position"}</strong>
+                {controls}
             </div>
             <Field
                 label={sectionType === "skills" ? "Kategorie" : "Titel der Position"}
