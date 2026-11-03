@@ -75,3 +75,20 @@ export function isValidCv(data) {
         data.sections.every((section) => Array.isArray(section.positions))
     );
 }
+
+export function createEmptyCv() {
+    return {
+        theme: "default",
+        schema: "default",
+        version: "1.0",
+        name: "",
+        title: "",
+        contact: { ...EMPTY_CONTACT },
+        profile: "",
+        sections: [],
+        date: "auto",
+        location: "",
+        signature: null,
+        photo: null,
+    };
+}

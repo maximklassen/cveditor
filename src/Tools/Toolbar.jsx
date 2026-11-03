@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import demoData from "../data/data.json";
 import { useCvDispatch } from "../state/CvDispatchContext";
-import { isValidCv } from "../state/cvModel";
+import { createEmptyCv, isValidCv } from "../state/cvModel";
 import { downloadJson, readJsonFile } from "../utils/files";
 
 function Toolbar({ cv }) {
@@ -25,7 +25,16 @@ function Toolbar({ cv }) {
         }
     }
 
-    function handleReset() {
+    function handleNew() {
+        const message =
+            "Einen neuen, leeren Lebenslauf anlegen? Alle aktuellen Daten gehen verloren " +
+            "(vorher am besten als JSON exportieren).";
+        if (window.confirm(message)) {
+            dispatch({ type: "LOAD", data: createEmptyCv() });
+        }
+    }
+
+    function handleDemo() {
         if (window.confirm("Alle Änderungen verwerfen und die Beispieldaten laden?")) {
             dispatch({ type: "LOAD", data: demoData });
         }
@@ -33,6 +42,9 @@ function Toolbar({ cv }) {
 
     return (
         <div className="toolbar">
+            <button type="button" className="danger" onClick={handleNew}>
+                Neuer Lebenslauf
+            </button>
             <button type="button" onClick={() => fileInput.current.click()}>
                 JSON importieren
             </button>
@@ -49,8 +61,8 @@ function Toolbar({ cv }) {
             <button type="button" onClick={() => window.print()}>
                 Drucken / PDF
             </button>
-            <button type="button" className="danger" onClick={handleReset}>
-                Zurücksetzen
+            <button type="button" className="danger" onClick={handleDemo}>
+                Beispieldaten laden
             </button>
         </div>
     );
