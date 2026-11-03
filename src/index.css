@@ -1,6 +1,5 @@
 :root {
     --root-height: calc(100vh - 10px);
-    --basic-color: #ffffff;
 }
 * {
     box-sizing: border-box;
@@ -10,6 +9,7 @@ html, body {
     margin: 0;
 }
 body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     background-color: #e7eef3;
     height: 100vh;
 }

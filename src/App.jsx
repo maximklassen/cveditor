@@ -6,6 +6,7 @@ import { normalizeCv } from "./state/cvModel";
 import { cvReducer } from "./state/cvReducer";
 import Preview from "./Templates/Default/Preview";
 import Panel from "./Tools/Panel";
+import Toolbar from "./Tools/Toolbar";
 import { loadCv, saveCv } from "./utils/storage";
 
 // Startzustand
@@ -24,6 +25,7 @@ function App() {
         <CvDispatchContext value={dispatch}>
             <header className="app-header">
                 <div className="logo">CV Editor</div>
+                <Toolbar cv={cv} />
             </header>
             <main>
                 <Panel cv={cv} />

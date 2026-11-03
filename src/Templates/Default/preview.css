@@ -1,3 +1,6 @@
+/* Stil des Lebenslaufs. Alles steht unter .cv, damit er die Oberfläche
+   der App nicht beeinflusst. Die Klassennamen stammen aus index.php. */
+
 .cv {
     max-width: 210mm;
     margin: 0 auto;

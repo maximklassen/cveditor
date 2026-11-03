@@ -1,6 +1,9 @@
 import { formatMonth, parseDescription, shortenUrl } from "../../utils/format";
 import "./preview.css";
 
+// Das HTML entspricht dem Lebenslauf aus index.php (gleiche CSS-Klassen).
+// Die Vorschau liest nur aus `cv` und hat keinen eigenen State.
+
 function Period({ start, end }) {
     if (!start) return null;
     return (
