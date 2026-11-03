@@ -180,3 +180,66 @@ footer {
     gap: 0.4rem;
     margin-top: 0.5rem;
 }
+
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+button,
+.button {
+    padding: 0.3rem 0.65rem;
+    border: 1px solid #9aa5b1;
+    border-radius: 0.25rem;
+    background: #fff;
+    font: inherit;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+button:hover:not(:disabled),
+.button:hover {
+    background: #e4ecf2;
+}
+
+button:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+button.danger {
+    color: #ba2525;
+    border-color: #e5a1a1;
+}
+
+@media print {
+    body {
+        height: auto;
+        background: #fff;
+    }
+
+    #root {
+        height: auto;
+    }
+
+    .app-header,
+    .app-footer,
+    .tool-panel {
+        display: none;
+    }
+
+    main {
+        padding: 0;
+    }
+
+    .preview-panel {
+        height: auto;
+        overflow: visible;
+    }
+
+    .cv {
+        max-width: none;
+        padding: 0;
+    }
+}

@@ -1,10 +1,18 @@
-import { normalizeCv, createSection } from "./cvModel";
+import { createChapter, createPosition, createSection, normalizeCv } from "./cvModel";
 
 function editInSections(sections, id, edit) {
     return sections.map((section) => ({
         ...section,
         positions: editPositionList(section.positions, id, edit),
     }));
+}
+
+function moveItem(list, index, direction) {
+    const target = index + direction;
+    if (target < 0 || target >= list.length) return list;
+    const copy = [...list];
+    [copy[index], copy[target]] = [copy[target], copy[index]];
+    return copy;
 }
 
 function editPositionList(list, id, edit) {
@@ -48,8 +56,10 @@ export function cvReducer(state, action) {
                 sections: state.sections.filter((section) => section.id !== action.id),
             };
 
-        case "LOAD":
-            return normalizeCv(action.data);
+        case "MOVE_SECTION": {
+            const index = state.sections.findIndex((section) => section.id === action.id);
+            return { ...state, sections: moveItem(state.sections, index, action.direction) };
+        }
 
         case "ADD_POSITION": {
             const created = action.chapter
@@ -103,6 +113,9 @@ export function cvReducer(state, action) {
                     moveItem(list, index, action.direction),
                 ),
             };
+
+        case "LOAD":
+            return normalizeCv(action.data);
 
         default:
             return state;
