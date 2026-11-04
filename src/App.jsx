@@ -9,14 +9,18 @@ import Panel from "./Tools/Panel";
 import Toolbar from "./Tools/Toolbar";
 import { loadCv, saveCv } from "./utils/storage";
 
-// Startzustand
+// Startzustand: zuletzt gespeicherter Lebenslauf, sonst die Beispieldaten.
 function initCv() {
     return loadCv() ?? normalizeCv(demoData);
 }
 
 function App() {
+    // Der gesamte Lebenslauf liegt als JavaScript-Objekt in einem einzigen State.
+    // Panel (Formular) und Preview (Vorschau) bekommen ihn als Props,
+    // dispatch steht allen Komponenten über den Context zur Verfügung.
     const [cv, dispatch] = useReducer(cvReducer, null, initCv);
 
+    // Jede Änderung wird automatisch im Browser gespeichert.
     useEffect(() => {
         saveCv(cv);
     }, [cv]);
@@ -24,7 +28,10 @@ function App() {
     return (
         <CvDispatchContext value={dispatch}>
             <header className="app-header">
-                <div className="logo">CV Editor</div>
+                <div className="logo">
+                    <img src="/favicon.svg" alt="" />
+                    <span>CV Editor</span>
+                </div>
                 <Toolbar cv={cv} />
             </header>
             <main>
